@@ -160,7 +160,7 @@ public class Main6Activity extends AppCompatActivity {
         textView04.setText(str);
         for (i = 0; i <= 4; i++)imageButton[i].setPadding(0,0,0,0);
     }
-void startme (View view){
+public void startme (View view){
         disapp.setVisibility(View.GONE);
     tm.start();
 }
@@ -202,7 +202,8 @@ void startme (View view){
                         layoutparams.width = dimensionInDp;
                         imageButton[i].setLayoutParams(layoutparams);
                         imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                        imageButton[i].setPadding(4,4,4,4);
+                        int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                        imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
                     }
                 }
 
@@ -290,7 +291,8 @@ tm.cancel();
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 0;
@@ -329,7 +331,8 @@ tm.cancel();
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 2;
@@ -368,7 +371,8 @@ tm.cancel();
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 4;
@@ -406,7 +410,8 @@ tm.cancel();
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 3;
@@ -438,7 +443,8 @@ tm.cancel();
                     layoutparams.width = dimensionInDp;
                     imageButton[i].setLayoutParams(layoutparams);
                     imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                    imageButton[i].setPadding(4,4,4,4);
+                    int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                    imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
                 }
             }
             imageView[jinx_player].setImageResource(R.drawable.lizardt);
@@ -464,7 +470,8 @@ tm.cancel();
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 1;
@@ -554,8 +561,9 @@ tm.cancel();
         tt2.setText(str);
     }
 
-    public void elixir_call(View view) {p0++; mCountDownTimer.cancel();countdownPeriod +=4800;upd();
+    public void elixir_call(View view) {
         if (elixir_count > 0) {
+            p0++; mCountDownTimer.cancel();countdownPeriod +=4800;upd();
             imageView01.setEnabled(false);
             imageView02.setEnabled(false);
             imageView04.setEnabled(false);
@@ -567,8 +575,9 @@ tm.cancel();
                 imageButton[i].setEnabled(true);
         }
     }
-    public void felicis_call(View view) {p0++;mCountDownTimer.cancel();countdownPeriod +=4800;upd();
+    public void felicis_call(View view) {
         if (felicis_count > 0) {
+            p0++;mCountDownTimer.cancel();countdownPeriod +=4800;upd();
             imageView01.setEnabled(false);
             imageView02.setEnabled(false);
             imageView04.setEnabled(false);
@@ -580,15 +589,17 @@ tm.cancel();
                 ll[i].setEnabled(true);
         }
     }
-    public void kronos_call(View view) {p0++;mCountDownTimer.cancel();countdownPeriod +=9800;upd();
+    public void kronos_call(View view) {
         if (kronos_count > 0) {
+            p0++;mCountDownTimer.cancel();countdownPeriod +=9800;upd();
             kronos_count--;
             str = " x" + kronos_count + " ";
             textView03.setText(str);
         }
     }
-    public void jinx_call(View view) {p0++;mCountDownTimer.cancel();countdownPeriod +=4800;upd();
+    public void jinx_call(View view) {
         if (jinx_count > 0) {
+            p0++;mCountDownTimer.cancel();countdownPeriod +=4800;upd();
             imageView01.setEnabled(false);
             imageView02.setEnabled(false);
             j = 1;

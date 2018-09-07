@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -34,6 +35,7 @@ public class Main16Activity extends AppCompatActivity {
     private FirebaseAuth fa;
     private FirebaseAuth.AuthStateListener asl;
     private DatabaseReference dr,fr;
+    Button disapp;
     private String mUsername;
     ValueEventListener cel;
     TextView sc[] = new TextView[8];
@@ -53,6 +55,7 @@ public class Main16Activity extends AppCompatActivity {
         p = getIntent().getIntExtra("bot_player", 2);
         r = getIntent().getIntExtra("bot_rounds", 3);
         round = (TextView) findViewById(R.id.round);
+        disapp=(Button)findViewById(R.id.disapp);
         imageView[1] = (ImageView) findViewById(R.id.imageView1);
         imageView[2] = (ImageView) findViewById(R.id.imageView2);
         imageView[3] = (ImageView) findViewById(R.id.imageView3);
@@ -140,9 +143,21 @@ public class Main16Activity extends AppCompatActivity {
         }
         for (i = st; i <= ed; i++)
             ll[i].setEnabled(false);
-        cd.start();
     }
-
+    public void ready(View view){
+        disapp.setVisibility(View.GONE);
+        dr.child(nam).child(pass).child("ready").child(user).setValue("start");
+        fr = fd.getReference().child("db").child(nam).child(pass).child("ready");
+        cel = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if( dataSnapshot.getChildrenCount()==p) {
+                    cd.start();
+                }}
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}};
+        fr.addValueEventListener(cel);
+    }
     @Override
     public void onBackPressed() {
         return;
@@ -177,7 +192,8 @@ public class Main16Activity extends AppCompatActivity {
                         layoutparams.width = dimensionInDp;
                         imageButton[i].setLayoutParams(layoutparams);
                         imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                        imageButton[i].setPadding(4,4,4,4);
+                        int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                        imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
                     }
                 }
             }
@@ -186,12 +202,20 @@ public class Main16Activity extends AppCompatActivity {
     };
 
     public void start1(final int player_number) {
+        cd.cancel();
         no_of_rounds++;
         for (i = 0; i <= 4; i++)
             imageButton[i].setEnabled(false);
         cdt.start();
-        get_data();
+        cdtt.start();
     }
+
+    CountDownTimer cdtt=  new CountDownTimer(1600, 200) {
+        public void onTick(long millisUntilFinished) { }
+        public void onFinish() {
+            get_data();
+        }
+    };
 
     CountDownTimer cdt=  new CountDownTimer(30000, 200) {
         public void onTick(long millisUntilFinished) {
@@ -228,7 +252,6 @@ public class Main16Activity extends AppCompatActivity {
         public void onFinish() {
         }
     };
-
     public void c0(View view) {
         de0++;
         for (i = 0; i <= 4; i++)
@@ -250,7 +273,8 @@ public class Main16Activity extends AppCompatActivity {
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 0;
@@ -282,7 +306,8 @@ public class Main16Activity extends AppCompatActivity {
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 2;
@@ -314,7 +339,8 @@ public class Main16Activity extends AppCompatActivity {
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 4;
@@ -346,7 +372,8 @@ public class Main16Activity extends AppCompatActivity {
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 3;
@@ -378,7 +405,8 @@ public class Main16Activity extends AppCompatActivity {
                 layoutparams.width = dimensionInDp;
                 imageButton[i].setLayoutParams(layoutparams);
                 imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                imageButton[i].setPadding(4,4,4,4);
+                int padInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 4, getResources().getDisplayMetrics());
+                imageButton[i].setPadding(padInDp,padInDp,padInDp,padInDp);
             }
         }
         opt = 1;
@@ -391,6 +419,7 @@ public class Main16Activity extends AppCompatActivity {
     }
 
     public void get_data() {
+        cdtt.cancel();
         dr.child(nam).child(pass).child("round"+no_of_rounds).child(user).setValue(opt);
         fr = fd.getReference().child("db").child(nam).child(pass).child("round"+no_of_rounds);
         cel = new ValueEventListener() {
@@ -402,21 +431,15 @@ public class Main16Activity extends AppCompatActivity {
                         int pval = userDetails.getValue(Integer.class);
                         playmap.put(pname,pval);
                         }
-                    cdtt.start();
+                        cdt.cancel();
+                    set_pics();
+                    player_key = opt;
+                    calc(opt);
                 }}
             @Override
             public void onCancelled(DatabaseError databaseError) {}};
         fr.addValueEventListener(cel);
     }
-CountDownTimer cdtt=new CountDownTimer(2000,200) {
-    @Override
-    public void onTick(long millisUntilFinished) {
-    }
-    @Override
-    public void onFinish() {
-        cdt.cancel(); set_pics();calc(opt); timer.setTextColor(0xffdebf1b);
-    }
-};
     public void set_pics() {
         for (i = st; i <= ed; i++) {
             comp_number[i]=playmap.get(player_name[i]);
@@ -445,6 +468,7 @@ CountDownTimer cdtt=new CountDownTimer(2000,200) {
         }
     }
     public void calc(int player_number) {
+        comp_number[0] = player_number;
         for (int k = 0; k <= ed; k++) {
             for (i = 0; i <= ed; i++) {
                 if (i == k) {
@@ -475,6 +499,7 @@ CountDownTimer cdtt=new CountDownTimer(2000,200) {
         mCountDownTimer.start();
     }
     void nextact(){
+        mCountDownTimer.cancel();
         SharedPreferences sharedPreferences = getSharedPreferences("mydata", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("default_opt", de);
@@ -497,48 +522,49 @@ CountDownTimer cdtt=new CountDownTimer(2000,200) {
         intent.putExtra("player_name[6]", player_name[6]);
         intent.putExtra("player_name[7]", player_name[7]);
         intent.putExtra("bot_player", p);
-        cdt.cancel();
-        cdtt.cancel();
         startActivity(intent);
         finish();
     }
+void rep(){
+    mCountDownTimer.cancel();
+    for (i = st; i <= ed; i++) {
+        ll[i].setBackgroundResource(R.drawable.roundback);
+        sc[i].setBackgroundColor(0xff066420);
+        textView[i].setBackgroundColor(0xff066420);
+        imageView[i].setImageResource(R.drawable.male);
+    }
+    for (i = 0; i <= 4; i++)
+    {
+        int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 68, getResources().getDisplayMetrics());
 
+        RelativeLayout.LayoutParams layoutparams = (RelativeLayout.LayoutParams) imageButton[i].getLayoutParams();
+        layoutparams.height = dimensionInDp;
+        layoutparams.width = dimensionInDp;
+        imageButton[i].setLayoutParams(layoutparams);
+        imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
+        imageButton[i].setPadding(0,0,0,0);
+        imageButton[i].setEnabled(true);
+    }
+    str = "ROUND  :  " + no_of_rounds;
+    if (no_of_rounds != r + 1)
+        round.setText(str);
+    round.setVisibility(View.VISIBLE);
+    opt = -1;
+    timer.setTextColor(0xffec4c4c);
+    cd.start();
+}
         CountDownTimer mCountDownTimer = new CountDownTimer(3000, 900) {
             public void onTick(long millisUntilFinished) {
                 timer.setText(" " + millisUntilFinished / 900);
             }
-
             public void onFinish() {
                 timer.setText(" ");
                 if (no_of_rounds >= r + 1) {
-nextact();
+                    nextact();
                 }
                 else if(no_of_rounds < r + 1) {
-                    for (i = st; i <= ed; i++) {
-                        ll[i].setBackgroundResource(R.drawable.roundback);
-                        sc[i].setBackgroundColor(0xff066420);
-                        textView[i].setBackgroundColor(0xff066420);
-                        imageView[i].setImageResource(R.drawable.male);
-                    }
-                    for (i = 0; i <= 4; i++)
-                    {
-                        int dimensionInDp = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 68, getResources().getDisplayMetrics());
-
-                        RelativeLayout.LayoutParams layoutparams = (RelativeLayout.LayoutParams) imageButton[i].getLayoutParams();
-                        layoutparams.height = dimensionInDp;
-                        layoutparams.width = dimensionInDp;
-                        imageButton[i].setLayoutParams(layoutparams);
-                        imageButton[i].setScaleType(ImageView.ScaleType.FIT_XY);
-                        imageButton[i].setPadding(0,0,0,0);
-                        imageButton[i].setEnabled(true);
-                    }
-                    str = "ROUND  :  " + no_of_rounds;
-                    if (no_of_rounds != r + 1)
-                        round.setText(str);
-                    opt = -1;
-                    timer.setTextColor(0xffec4c4c);
+                    rep();
                 }
-                cd.start();
             }
         };
 }
