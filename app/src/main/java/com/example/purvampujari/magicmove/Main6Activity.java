@@ -11,6 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,6 +34,7 @@ public class Main6Activity extends AppCompatActivity {
     TextView textView[] = new TextView[8];
     TextView round,tt2,timer,ttt1;
     String str;
+    Button disapp;
     String player_name[] = new String[8];
     CountDownTimer mCountDownTimer;
     int comp_number[] = new int[8];
@@ -50,6 +52,7 @@ public class Main6Activity extends AppCompatActivity {
         p = getIntent().getIntExtra("bot_player", 1);
         r = getIntent().getIntExtra("bot_rounds", 3);
         round = (TextView) findViewById(R.id.round);
+        disapp=(Button)findViewById(R.id.disapp);
         imageView01 = (ImageView) findViewById(R.id.imageView01);
         imageView02 = (ImageView) findViewById(R.id.imageView02);
         imageView03 = (ImageView) findViewById(R.id.imageView03);
@@ -124,7 +127,7 @@ public class Main6Activity extends AppCompatActivity {
         }
         score[0] = (p - 1) * r;
         str = "" + score[0];
-        ///tt2.setText(str);
+        tt2.setText(str);
         for (i = st; i <= ed; i++)
             score[i] = (p - 1) * r;
         for (i = st; i <= ed; i++) {
@@ -156,9 +159,11 @@ public class Main6Activity extends AppCompatActivity {
         str = " x" + jinx_count + " ";
         textView04.setText(str);
         for (i = 0; i <= 4; i++)imageButton[i].setPadding(0,0,0,0);
-        tm.start();
     }
-
+void startme (View view){
+        disapp.setVisibility(View.GONE);
+    tm.start();
+}
     @Override
     public void onBackPressed() {
         return;
@@ -546,7 +551,7 @@ tm.cancel();
             sc[i].setText(str);
         }
         str = "" + score[0];
-        ///tt2.setText(str);
+        tt2.setText(str);
     }
 
     public void elixir_call(View view) {p0++; mCountDownTimer.cancel();countdownPeriod +=4800;upd();
@@ -705,17 +710,7 @@ tm.cancel();
             timer.setText(" " );
             calc(player_key);
             if (no_of_rounds == r + 1) { pp0++;
-                new AlertDialog.Builder(this)
-                        .setTitle("Closing application")
-                        .setMessage("Are you sure you want to exit?"+pp0+"*"+p0)
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        }).setNegativeButton("No", null).show();
-                tt2.append("r");
-                //if(p0!=0)ccallend();
+                ccallend();
             } else {
                 for (i = st; i <= ed; i++) {
                     ll[i].setBackgroundResource(R.drawable.roundback);
@@ -787,10 +782,8 @@ tm.cancel();
             public void onTick(long millisUntilFinished) {
                 timer.setText(" " + millisUntilFinished/900);
                 countdownPeriod = millisUntilFinished;
-                tt2.setText(countdownPeriod+"."+no_of_rounds);
             }
             public void onFinish() {
-                tt2.append("f");
                 nextfin();
             }
         }.start();
